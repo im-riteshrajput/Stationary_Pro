@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To StationaryPro</title>
+    <meta name="description"
+        content="Efficient stationery inventory management system with real-time tracking, low stock alerts, and automated receipt generation for businesses.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    
+    
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-hero">
+            <div class="hero-content">
+                <h1>StationeryPro</h1>
+                <p>Professional Stationery Management System</p>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-box"></i>
+                        <span>Inventory Tracking</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-search"></i>
+                        <span>Quick Search</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bell"></i>
+                        <span>Low Stock Alerts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-form-container">
+            <form id="loginForm" class="login-form">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your account</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button id="submit" class="btn-primary">
+                    Sign In
+                </button>
+                
+                <div id="error-message" class="error-message" style="display: none"></div>
+                
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Username: admin@gmail.com</p>
+                    <p>Password: admin123</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    <script src="js/auth.js" type="module"></script>
+</body>
+
+</html>

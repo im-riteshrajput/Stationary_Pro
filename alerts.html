@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Stock Alerts - StationeryPro</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+<div id="loader" class="loader-overlay">
+            <div class="loader-spinner">
+                <div class="spinner"></div>
+                <p class="loader-text">Loading Alert data...</p>
+            </div>
+        </div>
+
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-box"></i>
+                    <span class="logo-text">StationeryPro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inventory.html" class="nav-link">
+                        <i class="fas fa-boxes"></i>
+                        <span>Inventory</span>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="search.html" class="nav-link">
+                        <i class="fas fa-search"></i>
+                        <span>Search Items</span>
+                    </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                    <a href="receipts.html" class="nav-link">
+                        <i class="fas fa-receipt"></i>
+                        <span>Receipts</span>
+                    </a>
+                </li> -->
+                <li class="nav-item active">
+                    <a href="alerts.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Low Stock Alerts</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span class="username">Admin User</span>
+                    <span class="email">admin@stationery.com</span>
+                </div>
+                <button id="logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </nav>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div class="page-title">
+                    <h1>Low Stock Alerts</h1>
+                    <p>Items that need restocking</p>
+                </div>
+                <!-- <button class="btn-primary" onclick="generateReorderReceipt()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Generate Reorder Receipt
+                </button> -->
+            </header>
+            
+            <div class="alerts-summary">
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="lowStockCount">0</h3>
+                        <p>Low Stock Items</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon danger">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="outOfStockCount">0</h3>
+                        <p>Out of Stock Items</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Alert Items</h2>
+                    <div class="alert-filters">
+                        <select id="alertTypeFilter">
+                            <option value="">All Alerts</option>
+                            <option value="low">Low Stock</option>
+                            <option value="out">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div id="alertsList" class="alerts-list">
+                        <!-- Alerts will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/common.js"></script>
+    <script src="js/alerts.js" type="module"></script>
+</body>
+</html>

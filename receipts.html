@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipts - StationeryPro</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-box"></i>
+                    <span class="logo-text">StationeryPro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inventory.html" class="nav-link">
+                        <i class="fas fa-boxes"></i>
+                        <span>Inventory</span>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="search.html" class="nav-link">
+                        <i class="fas fa-search"></i>
+                        <span>Search Items</span>
+                    </a>
+                </li> -->
+                <li class="nav-item active">
+                    <a href="receipts.html" class="nav-link">
+                        <i class="fas fa-receipt"></i>
+                        <span>Receipts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="alerts.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Low Stock Alerts</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span class="username">Admin User</span>
+                    <span class="email">admin@stationery.com</span>
+                </div>
+                <button id="logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </nav>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <div class="page-title">
+                    <h1>Receipt Management</h1>
+                    <p>Generate and manage sales and reorder receipts</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn-secondary" onclick="showCustomerReceiptModal()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Customer Receipt
+                    </button>
+                    <button class="btn-primary" onclick="showReorderReceiptModal()">
+                        <i class="fas fa-truck"></i>
+                        Reorder Receipt
+                    </button>
+                </div>
+            </header>
+            
+            <div class="receipt-tabs">
+                <button class="tab-btn active" onclick="switchTab('generator')">
+                    <i class="fas fa-plus"></i>
+                    Generate Receipt
+                </button>
+                <button class="tab-btn" onclick="switchTab('history')">
+                    <i class="fas fa-history"></i>
+                    Receipt History
+                </button>
+            </div>
+            
+            <!-- Receipt Generator Tab -->
+            <div id="generatorTab" class="tab-content active">
+                <div class="receipt-types">
+                    <div class="receipt-type-card" onclick="showCustomerReceiptModal()">
+                        <div class="card-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Customer Receipt</h3>
+                        <p>Generate receipt for customer purchases</p>
+                        <button class="btn-primary">Create Receipt</button>
+                    </div>
+                    
+                    <div class="receipt-type-card" onclick="showReorderReceiptModal()">
+                        <div class="card-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Reorder Receipt</h3>
+                        <p>Generate receipt for restocking items</p>
+                        <button class="btn-primary">Create Receipt</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Receipt History Tab -->
+            <div id="historyTab" class="tab-content">
+                <div class="history-filters">
+                    <select id="receiptTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="customer">Customer Receipts</option>
+                        <option value="reorder">Reorder Receipts</option>
+                    </select>
+                    
+                    <input type="date" id="dateFromFilter">
+                    <input type="date" id="dateToFilter">
+                    
+                    <button class="btn-secondary" onclick="applyFilters()">
+                        <i class="fas fa-filter"></i>
+                        Apply Filters
+                    </button>
+                </div>
+                
+                <div class="receipt-history">
+                    <div id="receiptHistoryList">
+                        <!-- Receipt history will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Receipt Modal -->
+    <div id="customerReceiptModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Customer Receipt</h2>
+                <button class="modal-close" onclick="closeCustomerReceiptModal()">&times;</button>
+            </div>
+            
+            <div class="receipt-form">
+                <div class="customer-info">
+                    <div class="form-group">
+                        <label for="customerName">Customer Name (Optional)</label>
+                        <input type="text" id="customerName" placeholder="Enter customer name">
+                    </div>
+                </div>
+                
+                <div class="items-selection">
+                    <h3>Select Items</h3>
+                    <div class="item-search">
+                        <input type="text" id="itemSearchInput" placeholder="Search items...">
+                    </div>
+                    
+                    <div id="availableItems" class="available-items">
+                        <!-- Available items will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="selected-items">
+                    <h3>Selected Items</h3>
+                    <div id="selectedItems" class="selected-items-list">
+                        <p class="empty-message">No items selected</p>
+                    </div>
+                </div>
+                
+                <div class="receipt-total">
+                    <div class="total-row">
+                        <span>Total Amount:</span>
+                        <span id="receiptTotal">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCustomerReceiptModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="generateCustomerReceipt()">Generate Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reorder Receipt Modal -->
+    <div id="reorderReceiptModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Reorder Receipt</h2>
+                <button class="modal-close" onclick="closeReorderReceiptModal()">&times;</button>
+            </div>
+            
+            <div class="reorder-form">
+                <div class="reorder-options">
+                    <button class="btn-secondary" onclick="loadLowStockItems()">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Auto-Load Low Stock Items
+                    </button>
+                    <button class="btn-secondary" onclick="showManualItemSelection()">
+                        <i class="fas fa-plus"></i>
+                        Add Items Manually
+                    </button>
+                </div>
+                
+                <div class="reorder-items">
+                    <h3>Reorder Items</h3>
+                    <div id="reorderItemsList" class="reorder-items-list">
+                        <p class="empty-message">No items in reorder list</p>
+                    </div>
+                </div>
+                
+                <div class="reorder-total">
+                    <div class="total-row">
+                        <span>Estimated Total:</span>
+                        <span id="reorderTotal">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeReorderReceiptModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="generateReorderReceipt()">Generate Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/common.js"></script>
+    <script src="js/receipts.js"></script>
+</body>
+</html>
